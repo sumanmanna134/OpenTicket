@@ -4,9 +4,12 @@ deploy:
   kubectl:
     manifests:
       - ./infra/k8s/*
+
 build:
   local:
     push: false
+  # googleCloudBuild:
+  #   projectId: microservice-account
   artifacts:
     - image: mannasuman134/auth
       context: auth
