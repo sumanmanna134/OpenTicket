@@ -46,3 +46,7 @@
 # architecture
 
 ![Contribution guidelines for this project](diagram/system.png)
+
+# Authentication Flow
+
+![Contribution guidelines for this project](diagram/authflow.png)
