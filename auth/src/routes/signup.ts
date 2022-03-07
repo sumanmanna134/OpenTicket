@@ -1,29 +1,41 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import { DatabaseConnectionError } from '../errors/database-connection-error';
 import { RequestValidationError } from '../errors/request-validation-errors';
-
+import { User } from '../models/userSchema';
+import 'express-async-errors'; // async error handler
+import { BadRequestError } from '../errors/bad-request-error';
+import { ApiConstant } from '../constant/constant';
 const router = express.Router();
 
 router.post(
   '/api/users/signup',
   [
-    body('email').isEmail().withMessage('Email must be valid'),
+    body('email').isEmail().withMessage(ApiConstant.INVALID_EMAIL),
     body('password')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage('Password must be between 4 and 20 characters'),
+      .withMessage(ApiConstant.INVALID_PASSWORD),
   ],
-  (req: Request, res: Response) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       throw new RequestValidationError(errors.array());
     }
-    console.log('Creating a user...');
-    throw new DatabaseConnectionError();
 
-    res.send({});
+    const { email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      throw new BadRequestError(ApiConstant.EMAIL_ALREADY_INUSE);
+    }
+
+    const user = User.build({ email, password });
+    await user
+      .save()
+      .then((user) => res.status(201).send(user))
+      .catch((err) => {
+        throw new BadRequestError(ApiConstant.ACCOUNT_CREATION_FAILED);
+      });
   }
 );
 
