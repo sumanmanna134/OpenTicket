@@ -22,8 +22,6 @@ app.all('*', async (res, req, next) => {
   throw new NotFoundError();
 });
 
-app.use(errorHandler);
-
 const start = async () => {
   try {
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth').then(() => {
@@ -35,7 +33,7 @@ const start = async () => {
 };
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000!-');
+  console.log('Listening on port 3000!!-');
 });
-
+app.use(errorHandler);
 start();
