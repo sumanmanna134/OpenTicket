@@ -1,7 +1,7 @@
 {
-  "name": "auth",
+  "name": "tickets",
   "version": "1.0.0",
-  "description": "Auth Microservice",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --poll src/index.ts",
@@ -14,14 +14,10 @@
       "./src/test/setup.ts"
     ]
   },
-  "keywords": [
-    "Node",
-    "Docker",
-    "Authentication",
-    "typescript"
-  ],
-  "author": "Suman Manna",
-  "license": "MIT",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@offlix-org/common": "^1.0.3",
     "@types/cookie-session": "^2.0.44",
