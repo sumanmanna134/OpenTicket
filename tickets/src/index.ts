@@ -7,11 +7,12 @@ const start = async () => {
     throw new Error('JWT_KEY must be defined!');
   }
   if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI (AUTH) must be defined!');
+    throw new Error('MONGO URI Not defined!');
   }
+
   try {
     await mongoose.connect(process.env.MONGO_URI).then(() => {
-      console.log('MongoDB connected !!');
+      console.log('MongoDB connected ( TICKETS) !!');
     });
   } catch (err) {
     console.log(err);

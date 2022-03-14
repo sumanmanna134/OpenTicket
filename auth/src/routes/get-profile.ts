@@ -1,10 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { requireAuth } from '../middleware/require-auth';
+import { requireAuth } from '@offlix-org/common';
 import 'express-async-errors';
-import { body } from 'express-validator';
-import { currentUser } from '../middleware/current-user';
+import { currentUser } from '@offlix-org/common';
 import { User } from '../models/userSchema';
-import { NotFoundError } from '../errors/not-found-error';
 
 const router = express.Router();
 

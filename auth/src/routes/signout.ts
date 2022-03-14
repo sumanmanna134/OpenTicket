@@ -1,7 +1,6 @@
 import express from 'express';
-import { BadRequestError } from '../errors/bad-request-error';
-import { currentUser } from '../middleware/current-user';
-import { requireAuth } from '../middleware/require-auth';
+import { currentUser } from '@offlix-org/common';
+import { requireAuth } from '@offlix-org/common';
 const router = express();
 
 router.post('/api/users/signout', currentUser, requireAuth, (req, res) => {
