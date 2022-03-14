@@ -1,10 +1,9 @@
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 import { User } from '../models/userSchema';
-import { NotFoundError } from '../errors/not-found-error';
-import { currentUser } from '../middleware/current-user';
-import { requireAuth } from '../middleware/require-auth';
-import { BadRequestError } from '../errors/bad-request-error';
+import { currentUser } from '@offlix-org/common';
+import { requireAuth } from '@offlix-org/common';
+import { BadRequestError } from '@offlix-org/common';
 
 const router = express.Router();
 

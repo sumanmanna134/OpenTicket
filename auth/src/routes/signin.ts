@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import { User } from '../models/userSchema';
 import 'express-async-errors';
 import { body } from 'express-validator';
-import { validateRequest } from '../middleware/validate-request';
-import { BadRequestError } from '../errors/bad-request-error';
+import { validateRequest } from '@offlix-org/common';
+import { BadRequestError } from '@offlix-org/common';
 import { Password } from '../services/password';
 import { setJwtToken } from './signup';
 

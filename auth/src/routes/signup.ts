@@ -1,12 +1,11 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import { RequestValidationError } from '../errors/request-validation-errors';
 import { User, UserDoc } from '../models/userSchema';
 import 'express-async-errors'; // async error handler
 import jwt from 'jsonwebtoken';
-import { BadRequestError } from '../errors/bad-request-error';
+import { BadRequestError } from '@offlix-org/common';
 import { ApiConstant } from '../constant/constant';
-import { validateRequest } from '../middleware/validate-request';
+import { validateRequest } from '@offlix-org/common';
 const router = express.Router();
 
 router.post(
