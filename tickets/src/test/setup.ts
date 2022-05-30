@@ -1,8 +1,7 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import { app } from '../app';
-import request from 'supertest';
 import jwt from 'jsonwebtoken';
+import { natsWrapper } from '../__mocks__/nats-wrapper';
 
 let mongo: any;
 
@@ -10,6 +9,7 @@ declare global {
   var signin: () => string[];
 }
 
+jest.mock('../nats-wrapper');
 beforeAll(async () => {
   process.env.JWT_KEY = 'asdfasdf';
   mongo = new MongoMemoryServer();
@@ -19,6 +19,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
 
   for (let i = 0; i < collections.length; i++) {

@@ -11,6 +11,8 @@ const router = express.Router();
 import mongoose from 'mongoose';
 import { Ticket } from '../models/ticketSchema';
 import { isValidTicket } from './utils/ticket-validation';
+import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 const updateTicket = async (req: Request, res: Response) => {
   const ticketId = req.params.id;
   const { title, price } = req.body;
@@ -34,6 +36,12 @@ const updateTicket = async (req: Request, res: Response) => {
       await ticket.set({ title, price, ip, currentUserId });
 
       await ticket.save();
+      new TicketUpdatedPublisher(natsWrapper.client).publish({
+        id: ticket.id,
+        title: ticket.title,
+        price: ticket.price,
+        userId: ticket.userId,
+      });
       res.send({
         message: `${title} updated Successfully!`,
         ticket: ticket,
