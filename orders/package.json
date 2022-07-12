@@ -1,5 +1,5 @@
 {
-  "name": "tickets",
+  "name": "order",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
       "./src/test/setup.ts"
     ]
   },
-  "type": "module",
+  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
