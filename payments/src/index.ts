@@ -2,8 +2,6 @@ import mongoose from 'mongoose';
 import { app } from './app';
 import { errorHandler } from '@offlix-org/common';
 import { natsWrapper } from './nats-wrapper';
-import { OrderCreatedListener } from './events/listeners/order-created-listeners';
-import { OrderCancelledListener } from './events/listeners/order-cancelled-listener';
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
@@ -39,8 +37,6 @@ const start = async () => {
 
     natsWrapper.client.on('connect', () => {
       console.log('Connection received.. NATS SERVER');
-      new OrderCreatedListener(natsWrapper.client).listen();
-      new OrderCancelledListener(natsWrapper.client).listen();
     });
     await mongoose.connect(process.env.MONGO_URI).then(() => {
       console.log('MongoDB connected ( TICKETS) !!');

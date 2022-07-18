@@ -27,6 +27,10 @@ const updateTicket = async (req: Request, res: Response) => {
         throw new BadRequestError('Ticket not Found!');
       }
 
+      if (ticket.orderId) {
+        throw new BadRequestError('Cannot edit a reserved ticket');
+      }
+
       if (ticket.userId !== currentUserId) {
         throw new BadRequestError(
           'You do not have permission to modify this ticket'
@@ -41,6 +45,7 @@ const updateTicket = async (req: Request, res: Response) => {
         title: ticket.title,
         price: ticket.price,
         userId: ticket.userId,
+        version: ticket.version,
       });
       res.send({
         message: `${title} updated Successfully!`,

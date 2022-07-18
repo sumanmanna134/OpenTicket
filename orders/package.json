@@ -1,5 +1,5 @@
 {
-  "name": "tickets",
+  "name": "order",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,12 +14,12 @@
       "./src/test/setup.ts"
     ]
   },
-  "type": "module",
+  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@offlix-org/common": "^1.0.10",
+    "@offlix-org/common": "^1.0.12",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",

@@ -1,7 +1,6 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import { natsWrapper } from '../__mocks__/nats-wrapper';
 
 let mongo: any;
 
@@ -35,7 +34,7 @@ afterAll(async () => {
 global.signin = () => {
   //build a JWT payload
   const payload = {
-    id: '5028a528',
+    id: new mongoose.Types.ObjectId().toHexString(),
     email: 'manna.suman134@gmail.com',
   };
   //create the JWT
