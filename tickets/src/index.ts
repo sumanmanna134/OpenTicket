@@ -37,8 +37,11 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
-    new OrderCreatedListener(natsWrapper.client).listen();
-    new OrderCancelledListener(natsWrapper.client).listen();
+    natsWrapper.client.on('connect', () => {
+      console.log('Connection received.. NATS SERVER');
+      new OrderCreatedListener(natsWrapper.client).listen();
+      new OrderCancelledListener(natsWrapper.client).listen();
+    });
     await mongoose.connect(process.env.MONGO_URI).then(() => {
       console.log('MongoDB connected ( TICKETS) !!');
     });
